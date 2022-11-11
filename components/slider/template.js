@@ -29,7 +29,7 @@ export default {
                     left: calc(50% - 5px);
                 }
                 .bg-color {
-                    background-image: linear-gradient(to right, #ff0000 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 66%, #f0f 83%, #f00 100%);
+                    background-image: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 66%, #f0f 83%, #f00 100%);
                 }
                 .bg-transparent {
                     background-image: linear-gradient(to right, transparent, ${props.bg}),

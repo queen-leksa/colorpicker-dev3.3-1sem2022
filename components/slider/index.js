@@ -1,4 +1,5 @@
 import Tmp from "./template.js";
+import {hsvToRgb} from "../functions.js";
 
 export default class Slider extends HTMLElement {
     static get observedAttributes() {
@@ -34,7 +35,6 @@ export default class Slider extends HTMLElement {
         this.addEventListener("mousedown", this.handler);
         this.addEventListener("mouseup", this.handler);
         this.addEventListener("mousemove", this.handler);
-        console.log(this.x, this.y);
         this.t = this.querySelector(".slider-thumb");
         this.tHalf = this.t.offsetWidth / 2;
     }
@@ -73,5 +73,9 @@ export default class Slider extends HTMLElement {
     }
     setPosition() {
         this.t.style.left = this.offsetWidth * +this.x / 100 +"px";
+        if (this.type === "color") {
+            let color = hsvToRgb(this.x * 360 / 100, 100, 100);
+            document.body.style.backgroundColor = `rgb(${color.r},${color.g},${color.b})`;
+        }
     }
 }
