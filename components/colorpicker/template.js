@@ -20,10 +20,6 @@ export default {
                     display: block;
                     grid-row: 1 / 3;
                 }
-                color-slider {
-                    display: block;
-                    position: relative;
-                }
             </style>
         `
     }

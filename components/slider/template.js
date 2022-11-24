@@ -5,6 +5,11 @@ export default {
             ${this.html(props)}
         `
     },
+    setDOM(self) {
+        return {
+            thumb: self.querySelector(".slider-thumb")
+        }
+    },
     html(props) {
         return `
             <div class="overlay ${props.type === "color" ? "bg-color" : "bg-transparent"}"></div>
@@ -14,6 +19,10 @@ export default {
     css(props) {
         return `
             <style>
+                :host {
+                    display: block;
+                    position: relative;
+                }
                 .overlay {
                     position: absolute;
                     width: 100%;

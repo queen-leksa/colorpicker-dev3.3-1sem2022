@@ -10,7 +10,7 @@ export default class Slider extends HTMLElement {
             case "bg":
                 break;
             case "x":
-                if (this.t) {
+                if (this.dom && this.dom.thumb) {
                     this.setPosition();
                 }
         }
@@ -30,13 +30,18 @@ export default class Slider extends HTMLElement {
     get type() {
         return this.getAttribute("type");
     }
+    constructor() {
+        super();
+        this.attachShadow({mode: "open"});
+        this.content = this.shadowRoot;
+    }
     connectedCallback() {
-        this.innerHTML = Tmp.render({bg: this.getAttribute("bg"), type: this.getAttribute("type")});
+        this.content.innerHTML = Tmp.render({bg: this.getAttribute("bg"), type: this.getAttribute("type")});
         this.addEventListener("mousedown", this.handler);
         this.addEventListener("mouseup", this.handler);
         this.addEventListener("mousemove", this.handler);
-        this.t = this.querySelector(".slider-thumb");
-        this.tHalf = this.t.offsetWidth / 2;
+        this.dom = Tmp.setDOM(this.content);
+        this.tHalf = this.dom.thumb.offsetWidth / 2;
     }
     handler(e) {
         const bounds = this.getBoundingClientRect();
@@ -72,7 +77,7 @@ export default class Slider extends HTMLElement {
         this.x = (left / this.offsetWidth) * 100;
     }
     setPosition() {
-        this.t.style.left = this.offsetWidth * +this.x / 100 +"px";
+        this.dom.thumb.style.left = this.offsetWidth * +this.x / 100 +"px";
         if (this.type === "color") {
             let color = hsvToRgb(this.x * 360 / 100, 100, 100);
             document.body.style.backgroundColor = `rgb(${color.r},${color.g},${color.b})`;
