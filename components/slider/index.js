@@ -79,8 +79,8 @@ export default class Slider extends HTMLElement {
     setPosition() {
         this.dom.thumb.style.left = this.offsetWidth * +this.x / 100 +"px";
         if (this.type === "color") {
-            let color = hsvToRgb(this.x * 360 / 100, 100, 100);
-            document.body.style.backgroundColor = `rgb(${color.r},${color.g},${color.b})`;
+            // let color = hsvToRgb(this.x * 360 / 100, 100, 100);
+            // document.body.style.backgroundColor = `rgb(${color.r},${color.g},${color.b})`;
         }
     }
 }

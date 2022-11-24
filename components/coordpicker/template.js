@@ -34,7 +34,7 @@ export default {
                     background-image: linear-gradient(to right, #fff, ${bg});
                 }
                 .bg-overlay-b {
-                    background-image: linear-gradient(to bottom, transparent, #000);
+                    background-image: linear-gradient(to top, transparent, #000);
                 }
                 .thumb {
                     width: 6px;

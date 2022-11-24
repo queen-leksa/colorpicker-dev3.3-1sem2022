@@ -1,51 +1,44 @@
-const hsvToRgb = (h, s, v) => { // h (0-360), s (0-1), v (0-1)
-    // console.log("hue", h);
-    let hi = Math.floor(h / 60) % 6,
-        vm = ((100 - s) * v) / 100,
-        a = v - vm * (1 - Math.abs((hi % 2) - 1)),
-        vinc = vm + a,
-        vdec = v - a;
-        // vinc = v * (1 - s * (1 - v / 6 - hi)),
-        // vdec = v * (1 - s * (v / 6 - hi));
+const hsvToRgb = (h, s, v, alpha) => { // h (0-360), s (0-1), v (0-1)
+    let hi = h / 60,
+        c = v * s,
+        x = c * (1 - Math.abs((hi % 2) - 1))
     const color = {
         r: 0,
         g: 0,
-        b: 0
+        b: 0,
+        a: alpha
     }
-    switch(hi) {
+    switch(Math.floor(hi)) {
         case 0:
-            color.r = v;
-            color.g = vinc; // v3
-            color.b = vm;
+            color.r = c * 255;
+            color.g = x * 255;
+            color.b = 0;
             break;
         case 1:
-            color.r = vdec; // v2
-            color.g = v;
-            color.b = vm;
+            color.r = x * 255;
+            color.g = c * 255;
+            color.b = 0;
             break;
         case 2:
-            color.r = vm;
-            color.g = v;
-            color.b = vinc;
+            color.r = 0;
+            color.g = c * 255;
+            color.b = x * 255;
             break;
         case 3:
-            color.r = vm;
-            color.g = vdec;
-            color.b = v;
+            color.r = 0;
+            color.g = x * 255;
+            color.b = c * 255;
             break;
         case 4:
-            color.r = vinc;
-            color.g = vm;
-            color.b = v;
+            color.r = x * 255;
+            color.g = 0;
+            color.b = c * 255;
             break;
         case 5:
-            color.r = v;
-            color.g = vm;
-            color.b = vdec;
+            color.r = c * 255;
+            color.g = 0;
+            color.b = x * 255;
             break;
-    }
-    for (let k in color) {
-        color[k] = color[k] * 255 / 100;
     }
     return color;
 }

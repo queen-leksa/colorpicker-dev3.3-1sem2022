@@ -5,6 +5,13 @@ export default {
             ${this.html(props)}
         `
     },
+    setDOM(self) {
+        return {
+            hue: self.querySelector("color-slider[type='color']"),
+            transparent: self.querySelector("color-slider[type='transparent']"),
+            coords: self.querySelector("coord-picker")
+        }
+    },
     html(props) {
         return `
             <coord-picker x="50" y="50" bg="red"></coord-picker>
