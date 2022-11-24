@@ -15,10 +15,11 @@ export default {
     css(props) {
         return `
             <style>
-                coord-picker {
-                    position: relative;
-                    display: block;
-                    grid-row: 1 / 3;
+                :host {
+                    display: grid;
+                    grid-template-columns: 120px auto;
+                    grid-template-rows: 50px 50px;
+                    gap: 20px;
                 }
             </style>
         `

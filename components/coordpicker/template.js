@@ -5,6 +5,11 @@ export default {
             ${this.html()}
         `
     },
+    setDOM(self) {
+        return {
+            thumb: self.querySelector(".thumb")
+        }
+    },
     html() {
         return `
             <div class="bg-overlay bg-overlay-a"></div>
@@ -15,6 +20,11 @@ export default {
     css({bg}) {
         return `
             <style>
+                :host {
+                    position: relative;
+                    display: block;
+                    grid-row: 1 / 3;
+                }
                 .bg-overlay {
                     width: 100%;
                     height: 100%;

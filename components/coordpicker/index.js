@@ -9,7 +9,7 @@ export default class CoordPicker extends HTMLElement {
             case "bg":
                 break;
             default:
-                if (this.t) {
+                if (this.dom && this.dom.thumb) {
                     this.setPosition();
                 }
         }
@@ -32,14 +32,18 @@ export default class CoordPicker extends HTMLElement {
     get bg() {
         return this.getAttribute("bg");
     }
+    constructor() {
+        super();
+        this.attachShadow({mode: "open"});
+        this.content = this.shadowRoot;
+    }
     connectedCallback() {
-        this.innerHTML = Tmp.render({bg: this.getAttribute("bg")});
+        this.content.innerHTML = Tmp.render({bg: this.getAttribute("bg")});
         this.addEventListener("mousedown", this.handler);
         this.addEventListener("mouseup", this.handler);
         this.addEventListener("mousemove", this.handler);
-        console.log(this.x, this.y);
-        this.t = this.querySelector(".thumb");
-        this.tHalf = this.t.offsetWidth / 2;
+        this.dom = Tmp.setDOM(this.content);
+        this.tHalf = this.dom.thumb.offsetWidth / 2;
     }
     handler(e) {
         const bounds = this.getBoundingClientRect();
@@ -83,7 +87,7 @@ export default class CoordPicker extends HTMLElement {
         this.y = (top / this.offsetHeight) * 100;
     }
     setPosition() {
-        this.t.style.left = this.offsetWidth * +this.x / 100 + "px";
-        this.t.style.top = this.offsetHeight * +this.y / 100 + "px";
+        this.dom.thumb.style.left = this.offsetWidth * +this.x / 100 + "px";
+        this.dom.thumb.style.top = this.offsetHeight * +this.y / 100 + "px";
     }
 }
